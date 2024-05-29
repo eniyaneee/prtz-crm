@@ -22,6 +22,24 @@ $routes->get('dashboard', 'Dashboard::index');
 //NAVBAR ROUTES
 $routes->get('title', 'Navbar::title');
 $routes->post('navbartitle', 'Navbar::getTitle');
+$routes->post('navbartitleedit', 'Navbar::navbartitleedit');
+$routes->post('inserttile', 'Navbar::inserttile');
+$routes->post('deletetitle', 'Navbar::deletetitle');
+
+
+$routes->get('pages', 'Navbar::pages');
+$routes->post('get-pages', 'Navbar::getpages');
+$routes->post('delete-page-list', 'Navbar::deletepagelist');
+
+$routes->post('insertpages', 'Navbar::insertpages');
+
+$routes->post('delete-page', 'Navbar::deletepage');
+
+
+
+
+
+
 
 
 

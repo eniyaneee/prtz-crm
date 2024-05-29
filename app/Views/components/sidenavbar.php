@@ -66,9 +66,7 @@
                                     <a href="<?php echo base_url() ?>title" class="side-menu__item">
                                         Title</a>
                                 </li>
-                                <li class="slide">
-                                    <a href="<?php echo base_url() ?>sub-title" class="side-menu__item">Sub Title</a>
-                                </li>
+                                
                                 <li class="slide">
                                     <a href="<?php echo base_url() ?>pages" class="side-menu__item">Pages</a>
                                 </li>
