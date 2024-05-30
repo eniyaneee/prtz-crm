@@ -244,6 +244,45 @@ class Navbar extends BaseController
         // Return the result as a JSON response
         echo json_encode($response);
     }
+
+
+    public function updatepages(){
+
+        $db = \Config\Database::connect();
+
+        $title_id = $this->request->getPost('brand_id'); 
+        $page_name = $this->request->getPost('modal_name');
+        $id = $this->request->getPost('modal_id');
+
+        $sql = "UPDATE `tbl_navbar_pages` SET navbar_title_id = :title: , navbar_page = :pages: WHERE navbar_pages_id = :navbar_pages_id:";
+        $query = $db->query($sql, [
+            'title' => $title_id,
+            'pages' => $page_name,
+            'navbar_pages_id' => $id
+        ]);
+
+        $affectedRows = $db->affectedRows();
+        if ($affectedRows === 1) {
+            $result['code'] = 200;
+            $result['msg'] = 'Data updates Successfully';
+            $result['status'] = 'success';
+            
+        } else {
+            $result['code'] = 400;
+            $result['msg'] = 'Something Wrong';
+            $result['status'] = 'failure';
+            
+        }
+
+
+        echo json_encode($result);
+    
+
+
+
+
+
+    }
     
 
 

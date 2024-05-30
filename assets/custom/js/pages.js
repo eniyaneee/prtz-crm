@@ -35,7 +35,7 @@ $(document).ready(function () {
         if (mode == "new") {
             url = base_Url + "insertpages";
         } else if (mode == "edit") {
-            url = base_Url + "update-modal-list";
+            url = base_Url + "updatepages";
             data.append("modal_id", modal_id);
         }
 
@@ -142,9 +142,7 @@ $(document).ready(function () {
 
         var index = $(this).attr("id");
 
-
-
-    
+       
 
         $("#brand_id").val(res_DATA[index].navbar_title_id);
         $("#modal_name").val(res_DATA[index].navbar_page);
@@ -156,6 +154,8 @@ $(document).ready(function () {
     $(document).on("click", ".BtnDelete", function () {
         mode = "delete";
         var id = $(this).attr("idd");
+
+        
 
         Swal.fire({
             title: "Are you sure?",

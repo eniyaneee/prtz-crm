@@ -74,40 +74,17 @@
 
                             </ul>
                         </li>
-
-
-
-
-                     
-
-
-
-                        
-
-                     
-
-
-                        
-
                     </ul>
                 </li>
 
                 <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item ">
-                        <i class="ri-briefcase-line side-menu__icon"></i>
-                        <span class="side-menu__label">User Address<span
-                                class="badge bg-secondary-transparent ms-2"></span></span>
-                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                    <a href="<?php echo base_url() ?>product" class="side-menu__item">
+                        <i class="bx bx-home side-menu__icon"></i>
+                        <span class="side-menu__label">Product<span
+                                class="badge bg-warning-transparent ms-2"></span></span>
+
                     </a>
-                    <ul class="slide-menu child1">
-                        <li class="slide has-sub">
-                            <a href="<?php echo base_url() ?>state-list" class="side-menu__item">State List
-                            </a>
-                        </li>
-                        <li class="slide has-sub">
-                            <a href="<?php echo base_url() ?>district-list" class="side-menu__item">District List
-                            </a>
-                        </li>
+                    <ul class="slide-menu child1-">
 
                     </ul>
                 </li>
