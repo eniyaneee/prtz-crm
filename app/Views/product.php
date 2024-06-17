@@ -80,7 +80,7 @@
         <div class="modal-dialog  modal-lg  modal-dialog-">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myLargeModalLabel">Add Details</h5>
+                    <h5 class="modal-title" id="myLargeModalLabel">Add Product</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -89,62 +89,69 @@
                             <div class="row">
 
                                 <div class="col-lg-6">
-                                    <label for="access_id" class="form-label">ProductMenu
+                                    <label for="access_id" class="form-label">Product Menu
                                     </label><br>
-                                    <select class="form-control" name="access_id" id="access_id">
-                                        
+                                    <select class="form-control" name="navbar_title_id" id="navbar_title_id">
+                                        <option value=""></option>
+                                        <option value="1">test</option>
+                                        <option value="2">test two</option>
+
+
 
                                     </select>
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="sub_access_id" class="form-label">Sub Menu
                                     </label><br>
-                                    <select class="form-control" name="sub_access_id" id="sub_access_id">
-
-                                        <!-- code -->
+                                    <select class="form-control" name="navbar_page_id" id="navbar_page_id">
+                                    <option value=""></option>
+                                        <option value="1">test</option>
+                                        <option value="2">test two</option>
                                     </select>
                                 </div>
 
                                 <div class="col-lg-12 mt-3">
                                     <div class="form-floating mb-4 floating">
                                         <input type="email" class="form-control product_name" id="product_name"
-                                            placeholder="ProductName" name="product_name" name="product_name"
-                                            value="">
+                                            placeholder="ProductName" name="product_name" value="">
                                         <label for="floatingInputprimary">ProductName</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 mt-2">
+                                    <div class="form-floating mb-4 floating">
+                                        <input type="email" class="form-control brand" id="brand" placeholder="Brand"
+                                            name="brand" name="brand" value="">
+                                        <label for="floatingInputprimary">Brand</label>
                                     </div>
                                 </div>
 
 
                                 <div class="col-lg-6 mt-3">
                                     <div class="form-floating mb-4 floating">
-                                        <input type="email" class="form-control" name="product_price" id="product_price"
-                                            placeholder="Product Price" value="">
-                                        <label for="product_price">ProductPrice</label>
+                                        <input type="email" class="form-control" name="price" id="price" placeholder=""
+                                            value="">
+                                        <label for="price">Product Price</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3">
                                     <div class="form-floating mb-4 floating">
                                         <input type="email" class="form-control" name="offer_price" id="offer_price"
-                                            placeholder="Product Price" value="">
+                                            placeholder="Offer Price" value="">
                                         <label for="offer_price">Offer Price</label>
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6 mt-3">
+                                <div class="col-lg-12 mt-3">
                                     <div class="form-floating mb-4 floating">
-                                        <input type="email" class="form-control offer_details" id="offer_details"
-                                            placeholder="Offer Details" name="offer_details" value="">
-                                        <label for="offer_details">Offer Details</label>
+                                        <input type="email" class="form-control discount_percentage"
+                                            id="discount_percentage" placeholder="Discount Percentage"
+                                            name="discount_percentage" value="">
+                                        <label for="offer_details">Discount Percentage</label>
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6 mt-3">
-                                    <div class="form-floating mb-4 floating">
-                                        <input type="email" class="form-control redirect_url" id="redirect_url"
-                                            placeholder="Redirect Url" name="redirect_url" value="">
-                                        <label for="redirect_url">Redirect Url</label>
-                                    </div>
-                                </div>
+
 
                                 <div class="col-lg-6">
                                     <label for="brand_id" class="form-label">New arrivals Status
@@ -164,7 +171,7 @@
                                 <div class="col-lg-6">
                                     <label for="brand_id" class="form-label">Stock status
                                     </label><br>
-                                    <select class="form-control" name="soldout_status" id="soldout_status">
+                                    <select class="form-control" name="stock_status" id="stock_status">
                                         <option value="">Select status</option>
 
                                         <option value="1">
@@ -174,166 +181,106 @@
                                             Out of Stock
                                         </option>
                                     </select>
-
                                 </div>
+                                <!-- <div class="col-lg-12 mt-3">
+                                    <label for="size" class="form-label">Size</label><br>
+                                    <select class="form-control basic-multiple" multiple="multiple" id="size"
+                                        name="size[]" data-bs-placeholder="Select">
+                                        <option value="1">Available</option>
+                                        <option value="0">Out of Stock</option>
+                                    </select>
+                                </div> -->
 
-                                <div class="col-lg-12 mt-3">
-                                    <label for="product_img" class="form-label">Product Image &nbsp;<span
-                                            class="text text-success">AllowedFiles :png,jpeg,jpg </span>
-                                    </label><br>
-                                    &nbsp;<span class="text text-success">
-                                        (1080 x 1440px)</span>
-                                    <input class="form-control" type="file" id="product_img" name="product_img">
-
-                                    <img src="" id="product_image_url" alt="image" width="130px"
-                                        style="padding-top: 15px; display:none;">
-
-                                    <span class="error text-danger product_img mt-5"></span>
-                                </div>
-
-                                <div class="modal-header mt-3">
-                                    <h5 class="modal-title"><i class="bi bi-bag"></i> Product Details</h5>
-
-                                </div>
-                                <!-- Product Details Start -->
-
-                                <div class="col-lg-3 mt-3">
-                                    <label for="img_1" class="form-label">Image 1 &nbsp;<span class="text text-success">
-                                            (1080 x 1440px)</span>
-                                    </label><br>
-                                    <input class="form-control" type="file" id="img_1" name="img_1">
-
-                                    <img src="" id="img1_url" alt="image" width="130px"
-                                        style="padding-top: 15px; display:none;">
-
-                                    <span class="error text-danger img_1 mt-5"></span>
-                                </div>
-
-                                <div class="col-lg-3 mt-3">
-                                    <label for="img_2" class="form-label">Image 2 &nbsp;<span class="text text-success">
-                                            (1080 x 1440px)</span>
-                                    </label><br>
-                                    <input class="form-control" type="file" id="img_2" name="img_2">
-
-                                    <img src="" id="img2_url" alt="image" width="130px"
-                                        style="padding-top: 15px; display:none;">
-
-                                    <span class="error text-danger img_2 mt-5"></span>
-                                </div>
-
-
-                                <div class="col-lg-3 mt-3">
-                                    <label for="img_3" class="form-label">Image 3 &nbsp;<span class="text text-success">
-                                            (1080 x 1440px)</span>
-                                    </label><br>
-                                    <input class="form-control" type="file" id="img_3" name="img_3">
-
-                                    <img src="" id="img3_url" alt="image" width="130px"
-                                        style="padding-top: 15px; display:none;">
-
-                                    <span class="error text-danger img_3 mt-5"></span>
-                                </div>
-                                <div class="col-lg-3 mt-3">
-                                    <label for="img_4" class="form-label">Image 4 &nbsp;<span class="text text-success">
-                                            (1080 x 1440px)</span>
-                                    </label><br>
-                                    <input class="form-control" type="file" id="img_4" name="img_4">
-
-                                    <img src="" id="img4_url" alt="image" width="130px"
-                                        style="padding-top: 15px; display:none;">
-
-                                    <span class="error text-danger img_4 mt-5"></span>
-                                </div>
-
-                                <div class="col-lg-12 mt-3">
-                                    <label for="prod_desc" class="form-label">Product
-                                        Description</label>
-                                    <textarea class="form-control" id="prod_desc" name="prod_desc" rows="3"></textarea>
-                                    <span class="error text-danger prod_desc mt-5"></span>
-                                </div>
-
-                                <div class="modal-header mt-3">
-                                    <h5 class="modal-title"> <i class="ri-briefcase-line"></i> Specifications</h5>
-
-                                </div>
-
-
-                                <div class="col-lg-4 mt-3">
-                                    <div class="form-floating mb-4 floating">
-                                        <input type="email" class="form-control" id="material" name="material"
-                                            placeholder="Material" value="">
-                                        <label for="material">Material</label>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 mt-3">
-                                    <div class="">
-                                        <select class="form-control floating" name="colour" id="colour">
-                                            <option value="">Select Color</option>
-                                            
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 mt-3">
-                                    <div class="form-floating mb-4 floating">
-                                        <input type="email" class="form-control" id="prod_weight" name="prod_weight"
-                                            placeholder="Product weight (kg)" value="">
-                                        <label for="prod_weight">Product weight (kg)</label>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 mt-3">
-                                    <div class="form-floating mb-4 floating">
-                                        <input type="email" class="form-control" id="measurement" name="measurement"
-                                            placeholder="Product measurement L*B*H (cm)" value="">
-                                        <label for="Product measurement">Product measurement L*B*H (cm)</label>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 mt-3">
-                                    <div class="form-floating mb-4 floating">
-                                        <input type="email" class="form-control" id="fitment" name="fitment"
-                                            placeholder="Fitment" value="">
-                                        <label for="fitment">Fitment</label>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 mt-3">
-                                    <div class="form-floating mb-4 floating">
-                                        <input type="email" class="form-control" id="warrenty" name="warrenty"
-                                            placeholder="Warranty" value="">
-                                        <label for="warrenty">warrenty</label>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="modal-header mt-3">
-                                    <h5 class="modal-title"><i class="bi bi-bar-chart-line"></i> Features</h5>
-
-                                </div>
-
-                                <div class="col-lg-12 mt-3">
-                                    <label for="features" class="form-label">Product
-                                        Features</label>
-                                    <textarea class="form-control" id="features" name="features" rows="3"></textarea>
-                                    <span class="error text-danger features mt-5"></span>
-                                </div>
 
                             </div>
-                        </div> <br><br>
-                        <div class="mb-3 d-flex justify-content-end">
-                            <a class="btn btn-success" id="btn-submit">Submit</a>
+
+                            <div class="col-lg-12 mt-3">
+                                <label for="product_img" class="form-label">Product Image &nbsp;<span
+                                        class="text text-success">AllowedFiles :png,jpeg,jpg </span>
+                                </label><br>
+                                &nbsp;<span class="text text-success">
+                                    (1080 x 1440px)</span>
+                                <input class="form-control" type="file" id="product_img" name="product_img">
+
+                                <img src="" id="product_image_url" alt="image" width="130px"
+                                    style="padding-top: 15px; display:none;">
+
+                                <span class="error text-danger product_img mt-5"></span>
+                            </div>
+
+
+                            <div class="col-lg-12 mt-3">
+                                <label for="img_1" class="form-label">Image 1 &nbsp;<span class="text text-success">
+                                        (1080 x 1440px)</span>
+                                </label><br>
+                                <input class="form-control" type="file" id="img_1" name="img_1">
+
+                                <img src="" id="img1_url" alt="image" width="130px"
+                                    style="padding-top: 15px; display:none;">
+
+                                <span class="error text-danger img_1 mt-5"></span>
+                            </div>
+
+                            <div class="col-lg-12 mt-3">
+                                <label for="img_2" class="form-label">Image 2 &nbsp;<span class="text text-success">
+                                        (1080 x 1440px)</span>
+                                </label><br>
+                                <input class="form-control" type="file" id="img_2" name="img_2">
+
+                                <img src="" id="img2_url" alt="image" width="130px"
+                                    style="padding-top: 15px; display:none;">
+
+                                <span class="error text-danger img_2 mt-5"></span>
+                            </div>
+
+
+                            <div class="col-lg-12 mt-3">
+                                <label for="img_3" class="form-label">Image 3 &nbsp;<span class="text text-success">
+                                        (1080 x 1440px)</span>
+                                </label><br>
+                                <input class="form-control" type="file" id="img_3" name="img_3">
+
+                                <img src="" id="img3_url" alt="image" width="130px"
+                                    style="padding-top: 15px; display:none;">
+
+                                <span class="error text-danger img_3 mt-5"></span>
+                            </div>
+
+                            <div class="col-lg-12 mt-3">
+                                <label for="prod_desc" class="form-label">Key Features
+                                </label>
+                                <textarea class="form-control" id="key_feature" name="key_feature" rows="3"></textarea>
+                                <span class="error text-danger 	key_feature mt-5"></span>
+                            </div>
+
+                            <div class="col-lg-12 mt-3">
+                                <label for="prod_desc" class="form-label">Details
+                                </label>
+                                <textarea class="form-control" id="details" name="details" rows="3"></textarea>
+                                <span class="error text-danger 	details mt-5"></span>
+                            </div>
+
+                            <div class="col-lg-12 mt-3">
+                                <label for="prod_desc" class="form-label">Ingredient Details
+                                </label>
+                                <textarea class="form-control" id="ingredient_details" name="ingredient_details"
+                                    rows="3"></textarea>
+                                <span class="error text-danger 	ingredient_details mt-5"></span>
+                            </div>
+
                         </div>
-
-                        </hr>
-                    </form>
-
+                </div> <br><br>
+                <div class="mb-3 d-flex justify-content-end">
+                    <a class="btn btn-success" id="btn-submit">Submit</a>
                 </div>
 
+                </hr>
+                </form>
+
             </div>
+
         </div>
+    </div>
     </div>
 
 

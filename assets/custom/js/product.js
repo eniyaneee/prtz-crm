@@ -1,5 +1,6 @@
 $(document).ready(function () {
     var mode, JSON, res_DATA, prod_id;
+     
   
     getproductDetails();
   
@@ -81,41 +82,38 @@ $(document).ready(function () {
     }
   
     $("#btn-submit").click(function () {
+     
       $(".error").hide();
-      if ($("#access_id").val() === "" && mode == "new") {
-        validateError("Please Select Menu");
-      } else if ($("#sub_access_id").val() === "" && mode == "new") {
+      if ($("#navbar_title_id").val() == "" && mode == "new") {
+        validateError("Please Select Product Menu");
+      } else if ($("#navbar_page_id").val() == "" && mode == "new") {
         validateError("Please Select SubMenu");
-      } else if ($("#product_name").val() === "" && mode == "new") {
-        validateError("Please Enter Accessories Name");
-      } else if ($("#product_price").val() === "" && mode == "new") {
+      } else if ($("#product_name").val() == "" && mode == "new") {
+        validateError("Please Enter Product Name");
+      } else if ($("#brand").val() == "" && mode == "new") {
+        validateError("Please Enter Brand*");
+      } else if ($("#price").val() == "" && mode == "new") {
         validateError("Please Enter Price*");
-      } else if ($("#offer_details").val() === "" && mode == "new") {
-        validateError("Please Enter offer details*");
-      } else if ($("#redirect_url").val() === "" && mode == "new") {
-        validateError("Please Enter url*");
-      } else if ($("#arrival_status").val() === "" && mode == "new") {
-        validateError("Please Select the Arrival Status*");
-      } else if ($("#soldout_status").val() === "" && mode == "new") {
-        validateError("Please Select Stock*");
-      } else if ($("#product_img").val() === "" && mode == "new") {
-        validateError("Please Select Product Image");
+      } else if ($("#offer_price").val() == "" && mode == "new") {
+        validateError("Please Enter Offer Price*");
+      } else if ($("#discount_percentage").val() == "" && mode == "new") {
+        validateError("Please Enter Discount Percentage*");
+      } else if ($("#arrival_status").val() == "" && mode == "new") {
+        validateError("Please Select Arrival Status*");
+      } else if ($("#stock_status").val() == "" && mode == "new") {
+        validateError("Please Select Stock Status ");
       }
   
       // Product Details
-      else if ($("#img_1").val() === "" && mode == "new") {
+      else if ($("#product_img").val() == "" && mode == "new") {
+        validateError("Please Select Image*");
+      } else if ($("#img_1").val() === "" && mode == "new") {
         validateError("Please Select  Image*");
       } else if ($("#img_2").val() === "" && mode == "new") {
         validateError("Please Select  Image*");
       } else if ($("#img_3").val() === "" && mode == "new") {
         validateError("Please Select  Image*");
-      } else if ($("#img_4").val() === "" && mode == "new") {
-        validateError("Please Select  Image*");
-      } else if ($("#prod_desc").val() === "" && mode == "new") {
-        validateError("Please Enter Product Description*");
-      } else if ($("#features").val() === "" && mode == "new") {
-        validateError("Please Enter Features *");
-      } else {
+      }else {
         insertData();
       }
     });
@@ -123,6 +121,7 @@ $(document).ready(function () {
     //*************************** [Insert] **************************************************************************
   
     function insertData() {
+      alert("insertdata working fine");
       var form = $("#Sub-product")[0];
       data = new FormData(form);
   
@@ -282,85 +281,6 @@ $(document).ready(function () {
         ],
       });
     }
-    // *************************** [View  Data] *************************************************************************
-    $(document).on("click", ".btnView", function () {
-      $("#model-view").modal("show");
-      var index = $(this).attr("id");
-  
-      $("#description").html(res_DATA[index].prod_desc);
-      $("#offer").html(res_DATA[index].offer_details);
-      $("#offer-price").html(res_DATA[index].offer_price);
-  
-      let sold_sts = res_DATA[index].soldout_status;
-  
-      $("#soldout-status").html(
-        `<span class="badge rounded-pill  ${
-          sold_sts == 1 ? "bg-success" : "bg-danger"
-        }">${sold_sts == 1 ? "Available" : "Out of Stock"}</span></a>`
-      );
-  
-      let arrival_sts = res_DATA[index].arrival_status;
-      $("#arrival-status").html(
-        `<span class="badge rounded-pill ${
-          arrival_sts == 1 ? "btn-success" : "btn-warning"
-        }">${arrival_sts == 1 ? "New Arrival" : "current"}</span>`
-      );
-      //  display image
-      let imgRow = "";
-      let img1 = res_DATA[index].img_1;
-      let img2 = res_DATA[index].img_2;
-      let img3 = res_DATA[index].img_3;
-      let img4 = res_DATA[index].img_4;
-  
-      imgRow += `<tr>
-        <td><img width="130px" src="${base_Url}${img1}" alt="Image 1"></td>
-        <td><img  width="130px" src="${base_Url}${img2}" alt="Image 2"></td>
-        <td><img width="130px" src="${base_Url}${img3}" alt="Image 3"></td>
-        <td><img width="130px" src="${base_Url}${img4}" alt="Image 4"></td>
-                  </tr>`;
-      $("#tbl-img tbody").html(imgRow);
-  
-      console.log(res_DATA[index]);
-      // Specification
-      let tblSpecific = "";
-      let material = res_DATA[index].material;
-      let color = res_DATA[index].color_name;
-      let prod_weight = res_DATA[index].prod_weight;
-      let measurement = res_DATA[index].measurement;
-      let fitment = res_DATA[index].fitment;
-      let warranty = res_DATA[index].warrenty;
-  
-      tblSpecific += `<tr>
-                        <td>Material</td>
-                        <td>${material}</td>
-                     </tr>
-                     <tr>
-                        <td>Color</td>
-                        <td>${color}</td>
-                     </tr>
-                     <tr>
-                        <td>Product weight (kg)</td>
-                        <td>${prod_weight}</td>
-                     </tr>
-                     <tr>
-                        <td>Product measurement L*B*H (cm)</td>
-                        <td>${measurement}</td>
-                     </tr>
-                     <tr>
-                        <td>Fitment</td>
-                        <td>${fitment}</td>
-                     </tr>
-                     <tr>
-                        <td>Warranty</td>
-                        <td>${warranty}</td>
-                     </tr>`;
-  
-      $("#specific tbody").html(tblSpecific);
-  
-      $("#product-feature").html(res_DATA[index].features);
-    });
-  
-    // *************************** [Edit Data] *************************************************************************
   
     var subAccessID;
     var subAccessName;
