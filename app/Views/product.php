@@ -55,7 +55,7 @@
                                                 <th>S.No</th>
                                                 <th>Menu</th>
                                                 <th>Submenu</th>
-                                                <th width="14%">ProductName</th>
+                                                <th>Product Name</th>
                                                 <th>Price</th>
                                                 <th>Image</th>
                                                 <th>Action</th>
@@ -92,9 +92,12 @@
                                     <label for="access_id" class="form-label">Product Menu
                                     </label><br>
                                     <select class="form-control" name="navbar_title_id" id="navbar_title_id">
-                                        <option value=""></option>
-                                        <option value="1">test</option>
-                                        <option value="2">test two</option>
+
+                                        <option value="">Select</option>
+                                        <?php foreach($title  as $phy) { ?>
+                                        <option value="<?php echo $phy['navbar_title_id'];?>">
+                                            <?php echo $phy['navbar_title'];?></option>
+                                        <?php } ?>
 
 
 
@@ -104,9 +107,7 @@
                                     <label for="sub_access_id" class="form-label">Sub Menu
                                     </label><br>
                                     <select class="form-control" name="navbar_page_id" id="navbar_page_id">
-                                    <option value=""></option>
-                                        <option value="1">test</option>
-                                        <option value="2">test two</option>
+                                        <option value="">Select sub menu</option>
                                     </select>
                                 </div>
 

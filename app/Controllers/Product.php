@@ -10,10 +10,17 @@ class Product extends BaseController
     public function index()
     {
         $this->session = \Config\Services::session();
+        $db = \Config\Database::connect();
+
         if ($this->session->get('username') == '') {
             return redirect()->to('/');
         }
-        return view('product');
+
+        $sql = "SELECT * FROM tbl_navbar_title WHERE flag = 1";
+        $res['title'] = $db->query($sql)->getResultArray();
+        // print_r($res);
+        // exit;
+        return view('product',$res);
     }
 
    
@@ -102,19 +109,146 @@ class Product extends BaseController
             }
         }
 
+            
+    }
+
+
+
+    public function getproduct(){
+        $db = \Config\Database::connect();
+        $res = [];
+        $query =
+            'SELECT 
+             *,B.navbar_title AS menu,C.navbar_page AS submenu FROM tbl_product AS A 
+             INNER JOIN tbl_navbar_title AS B ON A.navbar_title_id = B.navbar_title_id
+             INNER JOIN tbl_navbar_pages AS C ON A.navbar_page_id = C.navbar_pages_id
+             WHERE A.flag = 1';
+        $res = $db->query($query)->getResultArray();
+
+        echo json_encode($res);
+    }
+
+    public function getsubmenu() {
+        $db = \Config\Database::connect();
+        $id = $this->request->getPost('id');
+    
+        $query = 'SELECT * FROM tbl_navbar_pages WHERE navbar_title_id = ? AND flag = 1';
+        $res = $db->query($query, [$id])->getResultArray();
+
+        // Build HTML options
+    $options = '';
+    foreach ($res as $row) {
+        $options .= '<option value="' . $row['navbar_pages_id'] . '">' . $row['navbar_page'] . '</option>';
+    }
+    
+        echo json_encode($options);
+    }
+
+
+    public function deleteproduct()
+    {
+
+        $db = \Config\Database::connect();
+
+        $id = $this->request->getPost('prod_id');
+
+        $query = 'update`tbl_product` SET `flag` = 0 WHERE `product_id` = ?';
+        $res = $db->query($query, $id);
+
+        $affected_rows = $db->affectedRows();
+
+        if ($affected_rows && $res) {
+            $result['code'] = 200;
+            $result['status'] = 'success';
+            $result['message'] = 'Deleted Successfully';
+            echo json_encode($result);
+        } else {
+            $result['code'] = 400;
+            $result['status'] = 'Failure';
+            $result['message'] = 'Something wrong';
+            echo json_encode($result);
+        }
+
+    }
+
+    public function updateproduct(){
+        $db = \Config\Database::connect();
+
+        $data = $this->request->getPost();
+
+
+        $prodId = $this->request->getPost('prod_id');
+
+
+        if ($this->request->getFile('product_img') != '') {
+            $productImg = $this->request->getFile('product_img');
+            $prodname = $productImg->getName();
+            $prodname = str_replace(" ", "_", $prodname);
+            $filePath = "uploads/ProductImg/";
+
+            $productImg->move($filePath, $prodname);
+
+            $data['product_img'] = $filePath . $prodname;
+        }
+
+        if ($this->request->getFile('img_1') != '') {
+            $Img1 = $this->request->getFile('img_1');
+            $img1 = $Img1->getName();
+            $img1 = str_replace(" ", "_", $img1);
+            $filePath1 = "uploads/Img1/";
+
+            $Img1->move($filePath1, $img1);
+
+            $data['img_1'] = $filePath1 . $img1;
+        }
+
+        if ($this->request->getFile('img_2') != '') {
+            $Img2 = $this->request->getFile('img_2');
+            $img2 = $Img2->getName();
+            $img2 = str_replace(" ", "_", $img2);
+            $filePath2 = "uploads/Img2/";
+
+            $Img2->move($filePath2, $img2);
+
+            $data['img_2'] = $filePath2 . $img2;
+        }
+        if ($this->request->getFile('img_3') != '') {
+            $Img3 = $this->request->getFile('img_3');
+            $img3 = $Img3->getName();
+            $img3 = str_replace(" ", "_", $img3);
+            $filePath3 = "uploads/Img3/";
+
+            $Img3->move($filePath3, $img3);
+
+            $data['img_3'] = $filePath3 . $img3;
+        }
+
+
+        $modal = new ProductModel;
+        $updateRes = $modal->update($prodId, $data);
+        $affectedRows1 = $db->affectedRows();
 
        
 
         
 
-
-
-            
+        if ($affectedRows1) {
+            $result['code'] = 200;
+            $result['msg'] = 'Data updates Successfully';
+            $result['status'] = 'success';
+            echo json_encode($result);
+        } else {
+            $result['code'] = 400;
+            $result['msg'] = 'Something Wrong';
+            $result['status'] = 'failure';
+            echo json_encode($result);
+        }
     }
+    
 
    
 
-    
+      
     
 
 

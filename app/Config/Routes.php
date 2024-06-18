@@ -35,6 +35,15 @@ $routes->post('delete-page', 'Navbar::deletepage');
 // PRODUCT CONTOLLER
 $routes->get('product', 'Product::index');
 $routes->post('insert-product-list', 'Product::insert');
+$routes->post('getproduct', 'Product::getproduct');
+$routes->post('getsubmenu', 'Product::getsubmenu');
+$routes->post('deleteproduct', 'Product::deleteproduct');
+$routes->post('update-product-list', 'Product::updateproduct');
+
+
+
+
+
 
 
 

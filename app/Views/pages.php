@@ -88,7 +88,7 @@
                                 <label for="brand_id" class="form-label">Title
                                 </label><br>
                                 <select class="form-select" name="brand_id" id="brand_id">
-                                    <option value="">Select Brand Name</option>
+                                    <option value="">Select</option>
                                     <?php foreach ($brand_list as $brand) {
                                         ?>
                                         <option value="<?php echo $brand->navbar_title_id; ?>">
@@ -101,7 +101,7 @@
                             <div class="my-2">
                                 <label for="modal_name" class="form-label">Page Name</label>
                                 <input type="text" class="form-control modal_name" id="modal_name"
-                                    placeholder="Modal Name" name="modal_name" value="">
+                                    placeholder="Page Name" name="modal_name" value="">
                                 <span class="error text-danger modal_error mt-10"></span>
                             </div>
 

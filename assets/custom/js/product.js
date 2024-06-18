@@ -9,62 +9,20 @@ $(document).ready(function () {
     });
   
     function refreshDetails() {
-      $.when(getproductDetails()).done(function (brandDetails) {
-        var table = $("#datatable").DataTable();
-        table.clear();
-        table.rows.add(brandDetails);
-        table.draw();
-        window.location.reload();
-      });
+      getproductDetails();
     }
   
     $("#addData").click(function () {
+      $('#Sub-product')[0].reset();
+      $('#product_img').html('')
+
       mode = "new";
   
       $("#model-data").val("");
       $("#model-data").modal("show");
     });
   
-    //Filter  Submenu
-    $("#access_id").change(function () {
-      let access_id = $(this).val();
-      if (mode == "new") {
-        $.ajax({
-          type: "POST",
-          url: base_Url + "get-sub-access",
-          data: { access_id: access_id },
-          success: function (data) {
-            var res = $.parseJSON(data);
-  
-            var subAccess = "";
-  
-            for (let i = 0; i < res.length; i++) {
-              subAccess += `
-              <option value="${res[i]["sub_access_id"]}">${res[i]["sub_access_name"]}</option>`;
-            }
-            $("#sub_access_id").html(subAccess);
-          },
-        });
-      } else if (mode == "edit") {
-        $.ajax({
-          type: "POST",
-          url: base_Url + "get-sub-access",
-          data: { access_id: access_id },
-          success: function (data) {
-            var res = $.parseJSON(data);
-  
-            var subAccess = "";
-  
-            subAccess += `<option value="${subAccessID}">${subAccessName}</option>`;
-            for (let i = 0; i < res.length; i++) {
-              subAccess += `<option value="${res[i]["sub_access_id"]}">${res[i]["sub_access_name"]}</option>`;
-            }
-  
-            $("#sub_access_id").html(subAccess);
-          },
-        });
-      }
-    });
+   
     // *************************** [Validation] ********************************************************************
   
     function validateError(data) {
@@ -115,13 +73,14 @@ $(document).ready(function () {
         validateError("Please Select  Image*");
       }else {
         insertData();
-      }
+      } 
+
+        // insertData();
     });
   
     //*************************** [Insert] **************************************************************************
   
     function insertData() {
-      alert("insertdata working fine");
       var form = $("#Sub-product")[0];
       data = new FormData(form);
   
@@ -153,9 +112,7 @@ $(document).ready(function () {
             });
   
             $("#model-data").modal("hide");
-            setTimeout(function () {
-              window.location.reload();
-            }, 1000);
+            refreshDetails();
           } else {
             Swal.fire({
               title: "Failure",
@@ -208,7 +165,7 @@ $(document).ready(function () {
     function getproductDetails() {
       $.ajax({
         type: "POST",
-        url: base_Url + "get-product-list",
+        url: base_Url + "getproduct",
         dataType: "json",
         success: function (data) {
           res_DATA = data;
@@ -236,10 +193,10 @@ $(document).ready(function () {
             },
           },
           {
-            mDataProp: "access_title",
+            mDataProp: "menu",
           },
           {
-            mDataProp: "sub_access_name",
+            mDataProp: "submenu",
           },
           {
             mDataProp: "product_name",
@@ -266,9 +223,7 @@ $(document).ready(function () {
           {
             mDataProp: function (data, type, full, meta) {
               return (
-                '<a id="' +
-                meta.row +
-                '" class="btn btnView text-info fs-14 lh-1"> <i class="fe fe-eye"></i></a>' +
+                
                 '<a id="' +
                 meta.row +
                 '" class="btn btnEdit text-info fs-14 lh-1"> <i class="ri-edit-line"></i></a>' +
@@ -282,82 +237,76 @@ $(document).ready(function () {
       });
     }
   
-    var subAccessID;
-    var subAccessName;
     $(document).on("click", ".btnEdit", function () {
+      
+      var index = $(this).attr("id");
+      let title_id  = res_DATA[index].navbar_title_id;
+
+      $.ajax({
+        type: "POST",
+        url: base_Url + "getsubmenu",
+        data: {
+          id:title_id
+        },
+        dataType: "json",
+        success: function (data) {
+          $('#navbar_page_id').html('<option value="">Select</option>' + data);
+          $("#navbar_page_id").val(res_DATA[index].navbar_page_id);
+        },
+        error: function () {
+          console.log("Error");
+        },
+      });
+
+
+
+
+
+
+
+
+
+
+
+
       $("#model-data").modal("show");
       mode = "edit";
   
-      var index = $(this).attr("id");
-      console.log(res_DATA[index]);
+      $("#navbar_title_id").val(res_DATA[index].navbar_title_id);
+      
       $("#access_id").val(res_DATA[index].access_id);
-  
-      var accessId = res_DATA[index].access_id;
-      subAccessID = res_DATA[index].sub_access_id;
-      subAccessName = res_DATA[index].sub_access_name;
-  
-      $("#access_id").val(accessId).trigger("change");
-  
-      $subAccess = "";
-      $subAccess += `<option value="${res_DATA[index].sub_access_id}">${res_DATA[index].sub_access_name}</option>`;
-      $("#sub_access_id").append($subAccess);
-  
       $("#product_name").val(res_DATA[index].product_name);
-      $("#redirect_url").val(res_DATA[index].redirect_url);
-      $("#product_price").val(res_DATA[index].product_price);
+      $("#brand").val(res_DATA[index].brand);
+      $("#price").val(res_DATA[index].price);
       $("#offer_price").val(res_DATA[index].offer_price);
-      $("#offer_details").val(res_DATA[index].offer_details);
-  
+      $("#discount_percentage").val(res_DATA[index].discount_percentage);
       $("#arrival_status").val(res_DATA[index].arrival_status);
-  
-      $("#soldout_status").val(res_DATA[index].soldout_status);
-  
-      // product img
+      $("#stock_status").val(res_DATA[index].stock_status);
       $("#product_image_url").attr("src", base_Url + res_DATA[index].product_img);
       $("#product_image_url").addClass("active");
       $("#product_image_url").css("display", "block");
-      // images
-  
       $("#img1_url").attr("src", base_Url + res_DATA[index].img_1);
       $("#img1_url").addClass("active");
       $("#img1_url").css("display", "block");
-  
       $("#img2_url").attr("src", base_Url + res_DATA[index].img_2);
       $("#img2_url").addClass("active");
       $("#img2_url").css("display", "block");
-  
       $("#img3_url").attr("src", base_Url + res_DATA[index].img_3);
       $("#img3_url").addClass("active");
       $("#img3_url").css("display", "block");
-  
-      $("#img4_url").attr("src", base_Url + res_DATA[index].img_4);
-      $("#img4_url").addClass("active");
-      $("#img4_url").css("display", "block");
-  
-      $("#prod_desc").val(res_DATA[index].prod_desc);
-  
-      // specification
-      $("#material").val(res_DATA[index].material);
-  
-      var color = "";
-      color += `<option value="${res_DATA[index].colour}?>${res_DATA[index].color_name}</option>`;
-      $("#colour").val(res_DATA[index].colour);
-  
-      $("#prod_weight").val(res_DATA[index].prod_weight);
-      $("#measurement").val(res_DATA[index].measurement);
-      $("#fitment").val(res_DATA[index].fitment);
-      $("#warrenty").val(res_DATA[index].warrenty);
-  
-      $("#features").val(res_DATA[index].features);
-  
-      prod_id = res_DATA[index].prod_id;
+      $("#key_feature").val(res_DATA[index].key_feature);
+      $("#details").val(res_DATA[index].details);
+      $("#ingredient_details").val(res_DATA[index].ingredient_details);
+
+    
+      prod_id = res_DATA[index].product_id;
     });
   
     // *************************** [Delete Data] *************************************************************************
     $(document).on("click", ".BtnDelete", function () {
       mode = "delete";
       var index = $(this).attr("id");
-      prod_id = res_DATA[index].prod_id;
+      prod_id = res_DATA[index].product_id;
   
       Swal.fire({
         title: "Are you sure?",
@@ -371,7 +320,7 @@ $(document).ready(function () {
         if (result.isConfirmed) {
           $.ajax({
             type: "POST",
-            url: base_Url + "delete-product-list",
+            url: base_Url + "deleteproduct",
             data: { prod_id: prod_id },
   
             success: function (data) {
@@ -403,3 +352,23 @@ $(document).ready(function () {
     });
   });
   
+
+  $(document).on('change','#navbar_title_id',function(){
+
+    let id = $(this).val();
+
+    $.ajax({
+      type: "POST",
+      url: base_Url + "getsubmenu",
+      data: {
+        id: id
+      },
+      dataType: "json",
+      success: function (data) {
+        $('#navbar_page_id').html('<option value="">Select</option>' + data);
+      },
+      error: function () {
+        console.log("Error");
+      },
+    });
+  })
